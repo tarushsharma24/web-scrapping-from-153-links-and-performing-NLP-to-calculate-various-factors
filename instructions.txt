@@ -1,0 +1,41 @@
+i imported libraries requests, BeautifulSoup, pandas, punctuation from string, and stopwords from nltk.corpus. Then i loaded LoughranMcDonald_MasterDictionary_2020.xlsx file from the drive. which i downloaded from link provided. i then removed unwanted columns from this: 'Seq_num', 'Word Count', 'Word Proportion','Average Proportion', 'Std Dev', 'Doc Count','Uncertainty', 'Litigious', 'Strong_Modal', 'Weak_Modal','Constraining', 'Complexity', 'Syllables', 'Source'. i then converted these list of words in lower case and made two copies of this.
+in one list i only kept words that are positive and in another only negative words. then i loaded StopWords_Generic.txt and created a list of words that are present in it in lower case. last character was removed from this list as it was " \n ". i then loaded uncertainty_dictionary.xlsx and constraining_dictionary.xlsx and made two list that contained the words present in these two in lower case. 
+
+i then created four functions. first one is pos_neg. it tokenize the sentences then word then removed the stopwords present in StopWords_Generic.txt, punctuation, any numbers present and returned the value. second function is texts. it tokenize sentences and words and removed stopwords present in StopWords_Generic.txt, any numbers and punctuation except " . ". and returned the value. third function named syllables returned number of syllables present in the word. fourth function named con_repo tokenize sentences and words removed any punctuation ,numbers and stop words present in library from nltk.corpus import stopwords. this function is used to find constraining words whole report. i created a list yu that contained patters of " . " and space that i wanted to remove. this list was created to not remove all " . " and space but those who will change the output of calculating no of words and sentences through spaces and " . ". 
+
+i loaded the excel cik_list.xlsx and get their SECFNAME. and created a list that contained all the links called links.
+
+i used http trace in chrome to trace headers to connect to the site. Then i run the links in loop with these headers to open the links with these headers.
+
+in the for loop i created a soup that got all the values then used find_all() and get_text to get the required data of the report.
+
+for positive/negative value and polarity score:
+after getting the data of the report i passed it through the function pos_neg to preprocess it accordingly. then i compared the words that i got to positive words list and negative words list and counted for every time they matched. polarity score was calculated according to formula provided.
+
+for average sentence length and no. of words:
+then i used the funtion textx to preprocess the data to find no. of words and sentences. then i compared it with the list yu to remove any patters of " . " and space that i don't want. then i calculated the no. of sentences based on no. of " . ". no. of words were counted by further processing this by removing any single character or words with last character as " . ". another list named sas was created of these words for future processing. average sentences length was calculated by dividing no. of words with no. of sentences.
+
+for complex words:
+syllables function was used to calculate complex words by passing sas list through it.
+
+percentage complex words and fog index were calculated according to formula.
+
+for word count:
+list sas was compared with nltk.corpus stopwords english words. those not in this were calculated.
+
+for uncertainity score and constraining score:
+words is sas list were matched with list containing uncertainity and constraining words and were counted no of times they were present.
+
+positive word proportion, negative word proportion, uncertainity word proportion, constraining word proportion were calculated according to formula.
+
+constraining word whole report:
+function cons_repo was used to pre process the data. then using split() function words were formed in a list which were then compared with the list having constraining words to find no. of constraining in the whole report.
+
+the calculated values were added to the dataframe named last.
+cik_list.xlsx and last were concated sideways to form our desired dataframe named resultant.
+
+
+tarush sharma
+
+tarushsharma20@gmail.com
+
